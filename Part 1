@@ -1,0 +1,167 @@
+Part 1 
+Question 1: Problem Definition Problem Definition
+The problem is to develop an AI model that can predict crop yield for farmers based on factors such as weather patterns, soil quality, fertilizer usage, and historical harvest data. This prediction will help farmers make informed decisions on planting, irrigation, and resource allocation.
+Objectives 
+To accurately predict expected crop yield for each planting season to support farmers in planning and budgeting.
+
+
+To help farmers optimize resource usage (fertilizer, water, and labor) by providing early yield estimates.
+
+
+To reduce financial risk by giving farmers and agricultural stakeholders timely insights that improve decision-making.
+
+
+Stakeholders 
+Farmers and agricultural cooperatives who rely on accurate yield forecasts for planning and resource allocation.
+
+
+Government agricultural agencies and NGOs who use yield information for food security planning and intervention strategies.
+
+
+Key Performance Indicator (KPI)
+Mean Absolute Error (MAE) on predicted yield (in kilograms or tons per hectare).
+ A lower MAE indicates better prediction accuracy and more reliable decision-making support for farmers.
+Question 2: Data Collection & Preprocessing
+Data Sources 
+Historical agricultural records: Includes previous years’ crop yields, planting schedules, fertilizer usage, and irrigation patterns. These can be obtained from government agricultural departments or local cooperatives.
+
+
+Weather and environmental data: Daily or seasonal data on rainfall, temperature, humidity, and soil quality from meteorological departments or open-source satellite data (e.g., NASA, FAO).
+
+
+Potential Bias in the Data
+A potential bias arises if historical yield data is skewed toward large-scale commercial farms. Smallholder farmers may have inconsistent record-keeping, leading the model to overestimate yields for smaller farms. This could result in inaccurate predictions and unfair recommendations.
+Preprocessing Steps 
+Handling missing data:
+
+
+Impute missing weather measurements using the mean or interpolation methods.
+
+
+For missing yield or soil data, use median imputation or predictive imputation based on similar farms.
+
+
+Normalization & Encoding:
+
+
+Normalize numeric features (e.g., rainfall, fertilizer quantity) to a common scale to prevent bias toward larger values.
+
+
+Encode categorical variables (e.g., crop type, soil type) using one-hot encoding or label encoding.
+
+
+Feature Engineering & Outlier Handling:
+
+
+Create new features such as average seasonal rainfall, temperature variance, or fertilizer-to-area ratio.
+
+
+Detect and remove extreme outliers in yield or input features that could skew the model.
+
+
+This preprocessing ensures the data is clean, standardized, and informative, making it ready for model training. Bias awareness will also guide model evaluation and monitoring in later stages.
+Question 3: Model Development 
+Model Choice & Justification
+Model: Random Forest Regressor
+Justification:
+Handles mixed feature types (numeric and categorical) effectively.
+
+
+Robust to outliers and missing data, which is common in agricultural datasets.
+
+
+Provides feature importance, helping farmers and policymakers understand which factors affect yield most.
+
+
+Performs well on medium-sized datasets without heavy computational resources.
+
+
+
+Data Split
+Training set: 70% of the data — used to train the model.
+
+
+Validation set: 15% of the data — used to tune hyperparameters and prevent overfitting.
+
+
+Test set: 15% of the data — used to evaluate final model performance on unseen data.
+
+
+Rationale: Stratified sampling ensures that each crop type and farm size is proportionally represented in each split.
+Hyperparameters to Tune 
+n_estimators (number of trees):
+
+
+Determines the number of decision trees in the forest.
+
+
+Too few trees → underfitting; too many → increased computation time.
+
+
+max_depth (maximum depth of each tree):
+
+
+Controls the complexity of each tree.
+
+
+Helps prevent overfitting while allowing the model to capture important patterns.
+
+
+This setup ensures a robust model that balances predictive accuracy with interpretability, while tuning critical hyperparameters allows optimization for different crop types and farm conditions.
+Question 4: Evaluation & Deployment (8 points)
+Evaluation Metrics 
+Mean Absolute Error (MAE):
+
+
+Measures the average difference between predicted and actual crop yields.
+
+
+Relevant because it gives a clear, interpretable measure of prediction accuracy in units (kg/ha or tons/ha).
+
+
+R² Score (Coefficient of Determination):
+
+
+Indicates how well the model explains variance in crop yield.
+
+
+Relevant for understanding the overall predictive power of the model across different farms and crop types.
+
+
+Concept Drift & Monitoring
+Concept drift: Occurs when the statistical relationship between input features (weather, soil, fertilizer) and crop yield changes over time.
+ Example: Changes in climate patterns, new farming techniques, or introduction of new crop varieties may cause drift.
+Monitoring strategy:
+Track monthly or seasonal performance metrics (MAE, R²) on new incoming data.
+
+
+Compare feature distributions over time (e.g., rainfall, temperature) to detect significant shifts.
+
+
+Retrain the model periodically or when performance drops beyond a set threshold.
+
+
+Technical Deployment Challenge
+Challenge: Scalability and integration with farm management systems.
+Large datasets and multiple farm users require efficient prediction pipelines.
+
+
+Mitigation:
+Deploy the model as a REST API using Docker containers.
+
+
+Use batch processing for predictions on multiple farms.
+
+
+Optimize computational resources to handle seasonal spikes in data requests.
+
+
+Summary
+This evaluation and deployment plan ensures that the crop yield model:
+Is accurate and interpretable,
+
+
+Can adapt to changing conditions, and
+
+
+Can scale efficiently for real-world use by farmers and agricultural agencies.
