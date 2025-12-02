@@ -1,0 +1,58 @@
+Part 3 — Critical Thinking (20 points)
+A) Ethics & Bias (10 points)
+Impact of Biased Training Data
+If the training dataset underrepresents certain patient groups (e.g., low-income, minority populations), the model may underpredict readmission risk for these patients.
+
+
+Consequence: high-risk patients could miss follow-up care, leading to worsened health outcomes and perpetuating health inequities.
+
+
+Strategy to Mitigate Bias
+Data Augmentation / Balancing:
+
+
+Oversample underrepresented groups or apply class weighting during training to ensure fair representation.
+
+
+Bias Monitoring:
+
+
+Regularly evaluate model performance per demographic group (e.g., age, gender, socioeconomic status) to detect disparities.
+
+
+Transparent Model Documentation:
+
+
+Document assumptions, limitations, and potential biases to guide ethical use in hospital decision-making.
+
+
+
+B) Trade-offs (10 points)
+Interpretability vs Accuracy
+Trade-off: Complex models like Gradient Boosting or Neural Networks often achieve higher accuracy but are harder for clinicians to interpret.
+
+
+Consideration: Hospitals may prioritize interpretability to trust predictions, even if it slightly reduces accuracy. For example, a simpler logistic regression model may be easier to explain to care teams.
+
+
+Impact of Limited Computational Resources
+Hospitals with limited infrastructure may face slow model predictions or difficulty retraining large models.
+
+
+Solution:
+
+
+Choose lighter models (e.g., Random Forest with fewer trees or logistic regression) if resources are constrained.
+
+
+Use batch predictions instead of real-time inference to reduce server load.
+
+
+
+✅ Notes
+Critical thinking ensures the AI system is ethically responsible and practically deployable.
+
+
+Balancing accuracy, interpretability, and computational feasibility is key for healthcare applications.
+
+
